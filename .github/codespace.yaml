@@ -1,5 +1,5 @@
 # .github/codespace.yaml
-name: PROJECT_NAME_PLACEHOLDER
+name: coding_challenge_word_count
 on_create:
   tasks:
     - name: Install Dependencies

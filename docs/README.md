@@ -1,4 +1,4 @@
-# PROJECT_NAME_PLACEHOLDER
+# coding_challenge_word_count
 
 ## Table of Contents
 
@@ -6,4 +6,4 @@
 
 ## Overview
 
-PROJECT_DESCRIPTION_PLACEHOLDER
+returns the word, line, character, and byte count for a given .txt file.

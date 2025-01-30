@@ -1,4 +1,4 @@
-Welcome to the PROJECT_NAME_PLACEHOLDER documentation!
+Welcome to the coding_challenge_word_count documentation!
 ====================================================
 
 .. toctree::
@@ -10,6 +10,6 @@ Welcome to the PROJECT_NAME_PLACEHOLDER documentation!
 
 Project Description:
 ====================
-PROJECT_DESCRIPTION_PLACEHOLDER
+returns the word, line, character, and byte count for a given .txt file.
 
 .. todo:: Fill in the project description

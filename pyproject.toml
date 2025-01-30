@@ -2,12 +2,12 @@
 requires = ["setuptools", "wheel"]  # PEP 508 specifications.
 
 [project]
-name = "PROJECT_NAME_PLACEHOLDER"
+name = "coding_challenge_word_count"
 version = "1.0.0"
 authors = [
-    {name = "AUTHOR_NAME_PLACEHOLDER", email = "reuben.haug@gmail.com"},
+    {name = "reuben haug", email = "reuben.haug@gmail.com"},
 ]
-description = "PROJECT_DESCRIPTION_PLACEHOLDER"
+description = "returns the word, line, character, and byte count for a given .txt file."
 readme = "docs/README.md"
 requires-python = ">=3.12"
 
