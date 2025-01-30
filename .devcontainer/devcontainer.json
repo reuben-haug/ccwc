@@ -1,0 +1,54 @@
+{
+    "name": "Python Environment",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.black-formatter",
+                "ms-python.isort",
+                "ms-python.flake8",
+                "ms-vscode.makefile-tools"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/envs/pboy/bin/python",
+                "python.formatting.provider": "black",
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": "explicit"
+                }
+            }
+        }
+    },
+    "postCreateCommand": [
+        "/bin/bash",
+        "-c",
+        "source /opt/conda/etc/profile.d/mamba.sh && mamba shell init --shell bash --root-prefix=/opt/conda && printf '\\n# Template Setup Instructions\\nshow_instructions() {\\n  echo \"\\nTo set up your project:\"\\n  echo \"1. Run: python setup_template.py\"\\n  echo \"2. Run: make install and make docs\"\\n  echo \"3. Refer to docs/workflow.md\"\\n echo\\n}\\nshow_instructions\\n' >> ~/.bashrc"
+    ],
+    "postStartCommand": [
+        "/bin/bash",
+        "-ic",
+        "source /opt/conda/etc/profile.d/mamba.sh && eval \"$(mamba shell hook --shell bash)\" && mamba activate pboy"
+    ],
+    "remoteUser": "vscode",
+    "updateRemoteUserUID": true,
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "username": "vscode",
+            "upgradePackages": false
+        }
+    },
+    "securityOpt": ["no-new-privileges"],
+    "capAdd": [],
+    "privileged": false,
+    "remoteEnv": {
+        "MAMBA_ROOT_PREFIX": "/opt/conda",
+        "MAMBA_EXE": "/opt/conda/bin/mamba",
+        "PYTHONPATH": "/workspaces/src"
+    }
+}

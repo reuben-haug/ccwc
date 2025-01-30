@@ -1,0 +1,52 @@
+# First, ignore everything
+*
+*/**
+
+# Then, allow specific files/folders
+!.editorconfig
+
+# Core Python project files
+!pyproject.toml
+!setup.cfg
+!setup.py
+!requirements.txt
+!requirements-dev.txt
+!*.yaml
+
+# Source code and tests
+!src/
+!src/**/*.py
+!tests/
+!tests/**/*.py
+!tests/**/*.feature
+!pytest.ini
+!tox.ini
+!.coveragerc
+
+# Documentation
+!docs/
+!docs/**/*.rst
+!docs/**/*.md
+!*.rst
+!README.md
+!CHANGELOG.md
+!LICENSE
+
+# Development environment
+!.devcontainer/
+!.devcontainer/**
+!.github/
+!.github/**/*.yml
+
+# Version control
+!.gitignore
+!.gitattributes
+
+# Explicitly block
+.env
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+.pytest_cache/

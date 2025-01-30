@@ -1,0 +1,5 @@
+# pre-commit-config.yaml
+- black
+- flake8
+- isort
+- mypy

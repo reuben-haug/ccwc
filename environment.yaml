@@ -1,0 +1,13 @@
+name: pboy
+channels:
+  - conda-forge
+dependencies:
+  # Core Python
+  - python=3.12
+  - pip
+  
+  # Development Tools
+  - black=23.10.1
+  - pip-tools=6.13.0
+  - mypy
+  - flake8=6.1.0

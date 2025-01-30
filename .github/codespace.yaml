@@ -1,0 +1,20 @@
+# .github/codespace.yaml
+name: PROJECT_NAME_PLACEHOLDER
+on_create:
+  tasks:
+    - name: Install Dependencies
+      shell: bash
+      run: |
+        echo "Running conda setup..."
+        bash .devcontainer/conda_setup.sh
+    - name: Install Global development tools
+      shell: bash
+      run: |
+        echo "Installing development tools..."
+        pip install --no-cache-dir \
+          black==23.10.1 \
+          pip-tools==6.13.0 \
+          mypy \
+          flake8==6.1.0
+forwardPorts: 
+  - 8000  # Default port for web services, update as needed
