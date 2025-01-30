@@ -1,1 +1,1 @@
-WHO WHAT WHEN WHERE WHY???
+Print word, line, character, and byte count of a given .txt file.
