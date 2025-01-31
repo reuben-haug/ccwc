@@ -3,7 +3,7 @@
 import argparse
 import os
 import logging
-from typing import Dict, List
+from typing import Dict
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
