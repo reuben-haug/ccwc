@@ -1,9 +1,10 @@
 [build-system]
 requires = ["setuptools", "wheel"]  # PEP 508 specifications.
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "coding_challenge_word_count"
-version = "1.0.0"
+version = "0.1.0"
 authors = [
     {name = "reuben haug", email = "reuben.haug@gmail.com"},
 ]
