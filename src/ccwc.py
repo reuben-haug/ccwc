@@ -22,6 +22,30 @@ Examples:
 """
 
 
+# Imports go here
+import argparse
+
+
+def read_file(file_path):
+    pass
+
+
+def count_bytes(file_path):
+    pass
+
+
+def count_lines(file_path):
+    pass
+
+
+def count_words(file_path):
+    pass
+
+
+def count_chars(file_path):
+    pass
+
+
 def main():
     pass
 
