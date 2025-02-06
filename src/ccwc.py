@@ -24,31 +24,105 @@ Examples:
 
 # Imports go here
 import argparse
+import sys
 
 
 def read_file(file_path):
+    """Read the contents of a file at the given path."""
     pass
 
 
 def count_bytes(file_path):
+    """Return the number of bytes in a file."""
     pass
 
 
 def count_lines(file_path):
+    """Return the number of lines in a file."""
     pass
 
 
 def count_words(file_path):
+    """Return the number of words in a file."""
     pass
 
 
 def count_chars(file_path):
+    """Return the number of characters in a file."""
     pass
 
 
 def main():
-    pass
+    parser = argparse.ArgumentParser(
+        description="A coding challenge copy of the wc command in Unix/Linux."
+    )
+    parser.add_argument(
+        "file",
+        nargs="?",
+        default=sys.stdin,
+        type=argparse.FileType("r"),
+        help="The file to be processed.",
+    )
+    parser.add_argument(
+        "-c",
+        "--bytes",
+        action="store_true",
+        help="Count the number of bytes in the file.",
+    )
+    parser.add_argument(
+        "-l",
+        "--lines",
+        action="store_true",
+        help="Count the number of lines in the file.",
+    )
+    parser.add_argument(
+        "-w",
+        "--words",
+        action="store_true",
+        help="Count the number of words in the file.",
+    )
+    parser.add_argument(
+        "-m",
+        "--characters",
+        action="store_true",
+        help="Count the number of characters in the file.  Locale dependant.",
+    )
+    args = parser.parse_args()
+
+    file_contents = args.file.read()
+    # Check if file contents or standard input
+    file_name = args.file.name if args.file is not sys.stdin else ""
+
+    count_functions = {
+        "bytes": count_bytes,
+        "lines": count_lines,
+        "words": count_words,
+        "characters": count_chars,
+    }
+
+    # Default behaviour: Count lines, words, and characters
+    if not any([args.bytes, args.lines, args.words, args.characters]):
+        line_count = count_lines(file_contents)
+        word_count = count_words(file_contents)
+        char_count = count_chars(file_contents)
+        print(f"{line_count} {word_count} {char_count}")
+
+    if args.bytes:
+        byte_count = count_bytes(file_contents)
+        print(f"{byte_count} {file_name}")
+
+    if args.lines:
+        line_count = count_lines(file_contents)
+        print(f"{line_count} {file_name}")
+
+    if args.words:
+        word_count = count_words(file_contents)
+        print(f"{word_count} {file_name}")
+
+    if args.lines:
+        line_count = count_lines(file_contents)
+        print(f"{line_count} {file_name}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
