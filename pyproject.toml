@@ -20,6 +20,7 @@ dev = [
     # Development tools to work on this project
     "sphinx==7.0.1",
     "sphinxcontrib-plantuml==0.25",
+    "isort==5.13.2",
 ]
 test = [
     # Testing tools to test this project
@@ -34,3 +35,7 @@ test = [
 pythonpath = [
     "src"
 ]
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
