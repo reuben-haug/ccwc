@@ -3,21 +3,21 @@
 ccwc.py: A coding challenge copy of the wc command in Unix/Linux.
 
 This script reads the contents of a text file or standard input
-and counts the number of lines, words, characters, and bytes.
+and counts the number of bytes, lines, words, and characters.
 The file name is passed as an argument to the script.
 
-Usage: python ccwc.py [file_name] [-c] [-l] [-w] [-m]
+Usage: python src/ccwc.py [-c] [-l] [-w] [-m] [file_name]
 
 Arguments:
     file_name: The name of the file to be read.  If no file is provided,
     the script will read from standard input.
     -c: Count the number of bytes in the file.
-    -l: Count the number of words in the file.
+    -l: Count the number of lines in the file.
     -w: Count the number of words in the file.
     -m: Count the number of characters in the file.
 
 Examples:
-    python ccwc.py myfile.txt -l
+    python src/ccwc.py myfile.txt -l
     cat myfile.txt | python ccwc.py -c
 """
 
@@ -27,29 +27,25 @@ import argparse
 import sys
 
 
-def read_file(file_path):
-    """Read the contents of a file at the given path."""
-    pass
-
-
-def count_bytes(file_path):
+def count_bytes(content):
     """Return the number of bytes in a file."""
-    pass
+    return len(content.encode())
 
 
-def count_lines(file_path):
+def count_lines(content):
     """Return the number of lines in a file."""
-    pass
+    return content.count("\n")
 
 
-def count_words(file_path):
+def count_words(content):
     """Return the number of words in a file."""
-    pass
+    words = content.split()
+    return len(words)
 
 
-def count_chars(file_path):
+def count_chars(content):
     """Return the number of characters in a file."""
-    pass
+    return len(content)
 
 
 def main():
@@ -59,9 +55,9 @@ def main():
     parser.add_argument(
         "file",
         nargs="?",
-        default=sys.stdin,
-        type=argparse.FileType("r"),
-        help="The file to be processed.",
+        type=str,
+        default="-",
+        help="The file(s) to be processed."
     )
     parser.add_argument(
         "-c",
@@ -85,13 +81,28 @@ def main():
         "-m",
         "--characters",
         action="store_true",
-        help="Count the number of characters in the file.  Locale dependant.",
+        help="Count the number of characters in the file.",
     )
+
     args = parser.parse_args()
 
-    file_contents = args.file.read()
-    # Check if file contents or standard input
-    file_name = args.file.name if args.file is not sys.stdin else ""
+    if not sys.stdin.isatty():
+        file_contents = sys.stdin.read()
+        file_name = ""
+    else:
+        try:
+            # Read file in binary mode 
+            if args.bytes:
+                with open(args.file, 'rb') as file:
+                    file_contents = len(file.read())
+                    print(f"{file_contents} {args.file}")
+                    sys.exit(0)
+            with open(args.file, 'r', encoding='utf-8') as file:
+                file_contents = file.read()
+                file_name = args.file
+        except FileNotFoundError:
+            print(f"File not found: {args.file}")
+            sys.exit(1)
 
     count_functions = {
         "bytes": count_bytes,
@@ -102,26 +113,24 @@ def main():
 
     # Default behaviour: Count lines, words, and characters
     if not any([args.bytes, args.lines, args.words, args.characters]):
-        line_count = count_lines(file_contents)
-        word_count = count_words(file_contents)
-        char_count = count_chars(file_contents)
-        print(f"{line_count} {word_count} {char_count}")
-
-    if args.bytes:
-        byte_count = count_bytes(file_contents)
-        print(f"{byte_count} {file_name}")
-
-    if args.lines:
-        line_count = count_lines(file_contents)
-        print(f"{line_count} {file_name}")
-
-    if args.words:
-        word_count = count_words(file_contents)
-        print(f"{word_count} {file_name}")
-
-    if args.lines:
-        line_count = count_lines(file_contents)
-        print(f"{line_count} {file_name}")
+        results = [
+            count_functions["lines"](file_contents),
+            count_functions["words"](file_contents),
+            count_functions["characters"](file_contents)
+        ]
+        print(f"{' '.join(map(str, results))} {file_name}")
+    else:
+        results = []
+        flag_map = {
+            args.bytes: "bytes",
+            args.lines: "lines",
+            args.words: "words",
+            args.characters: "characters"
+        }
+        for flag, func_name in flag_map.items():
+            if flag:
+                results.append(count_functions[func_name](file_contents))
+        print(f"{' '.join(str(x) for x in results)} {file_name}")
 
 
 if __name__ == "__main__":
