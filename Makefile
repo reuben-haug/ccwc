@@ -39,6 +39,7 @@ install: check-setup
 
 test:
 	$(PYTEST) --cov=src --cov-report=term-missing tests/
+	behave tests/features
 
 format:
 	black src tests

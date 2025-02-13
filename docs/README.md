@@ -14,9 +14,7 @@ This tool has the following flags implemented:
 - -w: word count
 - -m: character count
 
-The default behavior without flags is to return all counts.
-
-todo: Support reading from standard input when no filename is specified.
+The default behavior without flags is to return all counts.  You can also use standard input to pipe text into the program.
 
 todo: Support reading from multiple files.
 
@@ -27,4 +25,9 @@ todo: Support multiple flags.
 ```bash
 >ccwc -c test.txt
     342190 test.txt
+```
+
+```bash
+>echo "Hello, world!" | ccwc -w
+    2
 ```
